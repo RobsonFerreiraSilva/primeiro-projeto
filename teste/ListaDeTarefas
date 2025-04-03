@@ -1,0 +1,78 @@
+# projeto simples de lista de tarefas em python
+
+import os
+# Lista para armazenar as tarefas 
+
+tarefas = []
+
+# Função para adicionar uma tarefa
+
+def adicionar_tarefa(tarefa):
+    tarefas.append({"tarefa": tarefa, "concluida": False})
+    print(f"Tarefa '{tarefa}' adicionada com sucesso !")
+
+# Função para listar as tarefas
+
+def listar_tarefas():
+    if not tarefas:
+        print("Nenhuma tarefa na lista.")
+    else:
+        print("\nLista de tarefas:")
+        for i,t in enumerate(tarefas):
+            status = "concluido" if t["concluida"] else "x"
+            print(f"{i + 1}. {t["tarefa"]} [{status}]")
+
+# Função marcar uma tarefa como concluída
+
+def marcar_concluida(indice):
+    if 0 <= indice < len(tarefas):
+        Tarefa_concluida = tarefas.pop(indice)
+        print(f'Tarefa"{Tarefa_concluida["tarefa"]} "Tarefa Concluída com sucesso! ')
+    else:
+        print("índice inválido ")
+
+
+# Função para remover tarefas
+
+def remover_tarefa(indice):
+    if 0 <= indice < len(tarefas):
+        tarefas_removida = tarefas.pop(indice)
+        print(f'Tarefa "{tarefas_removida["tarefa"]} "removida com sucesso ')
+    else:
+        print("índice invalido ")
+
+
+# Menu interativo
+
+def menu():
+    while True:
+        print("\n Lista de tarefas ")
+        print("1. Adicionar Tarefa")
+        print("2. Listar Tarefas")
+        print("3. Marcar como concluído")
+        print("4. Remover Tarefa")
+        print("5. sair")
+        opcao = input("Escolha uma opcção: ")
+
+        if opcao == "1":
+            tarefa = input("Adicione a nova tarefa: ")
+            adicionar_tarefa(tarefa)
+        elif opcao == "2":
+            listar_tarefas()
+        elif opcao == "3":
+            listar_tarefas()
+            indice = int(input("Digite o número da tarefa concluida: "))
+            marcar_concluida(indice - 1)
+        elif opcao == "4":
+            listar_tarefas()
+            indice = int(input("Digite o número da tarefa a ser removida: "))
+            remover_tarefa(indice - 1)
+        elif opcao == "5":
+            print("Saindo...")
+            break
+        else:
+            print("Opção invalida tente novamente. ")
+
+# Executar o menu
+if __name__ == "__main__":
+    menu()
